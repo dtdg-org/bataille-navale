@@ -2,16 +2,23 @@ from tkinter import Frame, Canvas
 
 from mvc.model.Colors import Colors
 
-SQUARE_SIZE = 30
-
 
 class GridView(Frame):
-    def __init__(self, controller, **kw):
+    """
+    Parent class for all grid views. Is in charge of displaying a grid
+    of a certain amount of squares and route mouse click and hovering
+    to dedicated methods.
+    """
+    SQUARE_SIZE_PX = 30
+
+    def __init__(self, game, **kw):
         super().__init__(**kw)
         self.grid(column=0, row=0, padx=5, pady=5, sticky="nsew")
+        self.master = kw['master']
 
-        # Add the controller as an attribute to reuse it later
-        self.controller = controller
+        # Add the game as an attribute to reuse it later
+        self.game = game
+        grid_model = game.player.grid
 
         # Battleship grid definition.
         grid_column = Frame(self)
@@ -20,34 +27,59 @@ class GridView(Frame):
         self.battleship_grid = {}
         # For each row and each column, create a canvas, representing one square
         i_row = 0
-        for row in controller.grid.rows_indices:
+        for row_index in grid_model.rows_indices:
             i_column = 0
-            for column in controller.grid.columns_indices:
+            for column_index in grid_model.columns_indices:
                 square = Canvas(grid_column,
                                 bg='white',
                                 borderwidth=0,
-                                width=SQUARE_SIZE,
-                                height=SQUARE_SIZE)
+                                width=GridView.SQUARE_SIZE_PX,
+                                height=GridView.SQUARE_SIZE_PX)
                 square.grid(row=i_row, column=i_column)
-                square.bind("<ButtonRelease>",
-                            lambda event, col=column, row=row: controller.click_on_grid(event, col, row))
-                square.bind("<Enter>", lambda event, col=column, row=row: controller.cursor_enter_cell(event, col, row))
-                square.bind("<Leave>", lambda event, col=column, row=row: controller.cursor_leave_cell(event, col, row))
+                square.bind("<Button-1>",
+                            lambda event, col=column_index, row=row_index: self.click_on_square(event, col, row, game))
+                square.bind("<Button-3>",
+                            lambda event, col=column_index, row=row_index: self.right_click(event, col, row, game))
+                square.bind("<Enter>",
+                            lambda event, col=column_index, row=row_index: self.cursor_enter_square(event, col, row,
+                                                                                                    game))
+                square.bind("<Leave>",
+                            lambda event, col=column_index, row=row_index: self.cursor_leave_square(event, col, row,
+                                                                                                    game))
+
+                self.battleship_grid[(column_index, row_index)] = square
                 i_column += 1
             i_row += 1
+        self.update_grid_view()
 
     def show(self):
         self.tkraise()
 
-    def set_background_color(self, widget, col, row):
-        if (col, row) in self.controller.game.boats:
-            color = Colors.BOAT
+    def click_on_square(self, event, col, row, game):
+        self.update_grid_view()
+
+    def right_click(self, event, col, row, game):
+        self.update_grid_view()
+
+    def cursor_enter_square(self, event, col, row, game):
+        pass
+
+    def cursor_leave_square(self, event, col, row, game):
+        self.update_grid_view()
+
+    def draw_square(self, col, row):
+        if self.game.player.grid.squares[col][row].has_boat:
+            if self.game.player.grid.squares[col][row].is_hit:
+                color = Colors.HIT
+            else:
+                color = Colors.BOAT
         else:
             color = Colors.NO_BOAT
-        widget['background'] = color.value
+        self.battleship_grid[(col, row)]['background'] = color.value
 
-    def set_hovered_background_color(self, widget, col, row):
-        widget['background'] = Colors.SELECTED.value
+    def draw_hovered_square(self, col, row):
+        self.battleship_grid[(col, row)]['background'] = Colors.SELECTED.value
 
-    def reset_background_color(self, widget, col, row):
-        self.set_background_color(widget, col, row)
+    def update_grid_view(self):
+        for position in self.battleship_grid.keys():
+            self.draw_square(position[0], position[1])

@@ -2,13 +2,15 @@ from mvc.model.Ruleset import Ruleset
 
 
 class ClassicRuleset(Ruleset):
-    # Classic Rules set is :
-    # 1 5-square boat
-    # 1 4-square boat
-    # 2 3-square boat
-    # 1 2-square boat
+    """
+    Classic Rules set is :
+    One 5-square boat,
+    One 4-square boat,
+    Two 3-square boat,
+    One 2-square boat.
 
-    # You can play again when you hit
+    You can play again when you hit.
+    """
 
     def __init__(self) -> None:
         super().__init__()
@@ -18,7 +20,6 @@ class ClassicRuleset(Ruleset):
             4: 1,
             5: 1
         }
-
         self.play_again_when_hit = True
-
         self.min_distance_between_boats = 1
+        self.side_length = 10

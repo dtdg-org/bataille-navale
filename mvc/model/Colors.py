@@ -2,8 +2,8 @@ from enum import Enum
 
 
 class Colors(Enum):
-    NO_BOAT = "#D3FF73"
-    BOAT = "#CCCB7A"
-    SELECTED = "#FFB3FE"
-    HIT = "#CC7B7A"
-    SUNK = "#992E2E"
+    NO_BOAT = "#92CBF0"
+    BOAT = "#BD7C60"
+    SELECTED = "#F2DFD0"
+    HIT = "#BD423E"
+    SUNK = "#72808A"
