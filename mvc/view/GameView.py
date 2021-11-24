@@ -36,12 +36,12 @@ class GameView(Frame):
 
         # Player grid definition.
         player_battleship_grid = PlayerGridView(game, master=self)
-        player_battleship_grid.grid(column=1, row=1, padx=5, pady=5)
+        player_battleship_grid.grid(column=1, row=1, padx=20, pady=5)
         self.player_battleship_grid = player_battleship_grid
 
         # Opponent grid definition.
         opponent_battleship_grid = OpponentGridView(game, master=self)
-        opponent_battleship_grid.grid(column=2, row=1, padx=5, pady=5)
+        opponent_battleship_grid.grid(column=2, row=1, padx=20, pady=5)
         self.opponent_battleship_grid = opponent_battleship_grid
 
     def show(self):
