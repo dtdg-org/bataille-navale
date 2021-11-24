@@ -37,15 +37,17 @@ class GridView(Frame):
                                 height=GridView.SQUARE_SIZE_PX)
                 square.grid(row=i_row, column=i_column)
                 square.bind("<Button-1>",
-                            lambda event, col=column_index, row=row_index: self.click_on_square(event, col, row, game))
+                            lambda event, col=column_index, row=row_index:
+                            self.click_on_square(event, col, row, game))
                 square.bind("<Button-3>",
-                            lambda event, col=column_index, row=row_index: self.right_click(event, col, row, game))
+                            lambda event, col=column_index, row=row_index:
+                            self.right_click(event, col, row, game))
                 square.bind("<Enter>",
-                            lambda event, col=column_index, row=row_index: self.cursor_enter_square(event, col, row,
-                                                                                                    game))
+                            lambda event, col=column_index, row=row_index:
+                            self.cursor_enter_square(event, col, row, game))
                 square.bind("<Leave>",
-                            lambda event, col=column_index, row=row_index: self.cursor_leave_square(event, col, row,
-                                                                                                    game))
+                            lambda event, col=column_index, row=row_index:
+                            self.cursor_leave_square(event, col, row, game))
 
                 self.battleship_grid[(column_index, row_index)] = square
                 i_column += 1
