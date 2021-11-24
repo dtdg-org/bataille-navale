@@ -53,7 +53,7 @@ class PlaceShipView(Frame):
         """
         This method is in charge of updating the state of the continue button.
         """
-        if self.game.get_size_of_next_boat_to_place() == 0:
+        if self.game.player.get_size_of_next_boat_to_place() == 0:
             self.continue_button['state'] = NORMAL
 
     def show(self):

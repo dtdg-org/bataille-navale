@@ -36,6 +36,10 @@ class MainController:
         pass
 
     def load_game_view(self):
+        """
+        Make the Opponent choose his boat placements and then load the game view
+        """
+        # self.game.opponent
         self.view = GameView(self, self.game, master=self.view_root)
         self.game.state = GameState.IN_GAME
         self.view.show()
