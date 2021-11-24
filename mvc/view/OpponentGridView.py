@@ -12,7 +12,6 @@ class OpponentGridView(GridView):
 
     def click_on_square(self, event, col, row, game: Game):
         hit = game.opponent.grid.hit(col, row)
-        print("hit" if hit else "miss")
         super().click_on_square(event, col, row, game)
 
     def right_click(self, event, col, row, game):
