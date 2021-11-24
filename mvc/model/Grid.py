@@ -15,7 +15,7 @@ class Grid:
                 self.squares[column_indice][row_indice] = Square()
 
     def hit(self, col, row) -> bool:
-        if self.squares[col][row].has_boat() and not self.squares[col][row].is_hit():
+        if self.squares[col][row].has_boat and not self.squares[col][row].is_hit:
             self.squares[col][row].set_hit(True)
             return True
         else:
