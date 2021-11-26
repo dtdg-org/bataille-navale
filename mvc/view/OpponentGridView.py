@@ -15,8 +15,8 @@ class OpponentGridView(GridView):
         super().click_on_square(event, col, row, game)
 
     def right_click(self, event, col, row, game):
-        self.battleship_grid[(col, row)]['background'] = Colors.FLAG.value
-        # TODO add flag to model for persistence
+        game.opponent.grid.flag(col, row)
+        super().right_click(event, col, row, game)
 
     def cursor_enter_square(self, event, col, row, game):
         self.draw_hovered_square(col, row)
@@ -26,16 +26,14 @@ class OpponentGridView(GridView):
         super().cursor_leave_square(event, col, row, game)
 
     def draw_square(self, col, row):
-        if self.game.opponent.grid.squares[col][row].has_boat:
-            if self.game.opponent.grid.squares[col][row].is_hit:
-                color = Colors.HIT
-            else:
-                color = Colors.NO_BOAT
-        else:
-            if self.game.opponent.grid.squares[col][row].is_hit:
-                color = Colors.MISS
-            else:
-                color = Colors.NO_BOAT
+        square = self.game.opponent.grid.squares[col][row]
+        color = Colors.NO_BOAT
+        if square.is_flag:
+            color = Colors.FLAG
+        if square.is_miss:
+            color = Colors.MISS
+        if square.is_hit:
+            color = Colors.HIT
         self.battleship_grid[(col, row)]['background'] = color.value
 
     def draw_hovered_square(self, col, row):

@@ -70,13 +70,14 @@ class GridView(Frame):
         self.update_grid_view()
 
     def draw_square(self, col, row):
-        if self.game.player.grid.squares[col][row].has_boat:
-            if self.game.player.grid.squares[col][row].is_hit:
-                color = Colors.HIT
-            else:
-                color = Colors.BOAT
-        else:
-            color = Colors.NO_BOAT
+        square = self.game.player.grid.squares[col][row]
+        color = Colors.NO_BOAT
+        if square.is_miss:
+            color = Colors.MISS
+        if square.is_hit:
+            color = Colors.HIT
+        if square.has_boat:
+            color = Colors.BOAT
         self.battleship_grid[(col, row)]['background'] = color.value
 
     def draw_hovered_square(self, col, row):
