@@ -1,4 +1,4 @@
-from mvc.model.Colors import Colors
+from mvc.model.enum.Colors import Colors
 from mvc.model.Game import Game
 from mvc.view.GridView import GridView
 

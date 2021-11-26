@@ -1,7 +1,7 @@
-from mvc.model.AIPlayer import AIPlayer
-from mvc.model.GameState import GameState
+from mvc.model.player.AIPlayer import AIPlayer
+from mvc.model.enum.GameState import GameState
 from mvc.model.Grid import Grid
-from mvc.model.HumanPlayer import HumanPlayer
+from mvc.model.player.HumanPlayer import HumanPlayer
 from mvc.model.Option import Option
 
 

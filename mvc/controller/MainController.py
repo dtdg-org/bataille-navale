@@ -1,8 +1,8 @@
 import tkinter as tk
 
 from mvc.model.Game import Game
-from mvc.model.GameState import GameState
-from mvc.model.ClassicRuleset import ClassicRuleset
+from mvc.model.enum.GameState import GameState
+from mvc.model.ruleset.ClassicRuleset import ClassicRuleset
 from mvc.model.Option import Option
 from mvc.view.GameView import GameView
 from mvc.view.PlaceShipView import PlaceShipView

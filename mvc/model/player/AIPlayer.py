@@ -1,8 +1,8 @@
 import random
 
-from mvc.model.Direction import Direction
-from mvc.model.Player import Player
-from mvc.model.PlayerType import PlayerType
+from mvc.model.enum.Direction import Direction
+from mvc.model.player.Player import Player
+from mvc.model.enum.PlayerType import PlayerType
 
 
 class AIPlayer(Player):

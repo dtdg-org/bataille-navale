@@ -1,6 +1,6 @@
 from tkinter import Frame, Canvas
 
-from mvc.model.Colors import Colors
+from mvc.model.enum.Colors import Colors
 
 
 class GridView(Frame):

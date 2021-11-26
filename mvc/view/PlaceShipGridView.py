@@ -1,4 +1,4 @@
-from mvc.model.Direction import Direction
+from mvc.model.enum.Direction import Direction
 from mvc.model.Game import Game
 from mvc.view.GridView import GridView
 
