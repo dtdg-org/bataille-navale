@@ -3,6 +3,7 @@ import tkinter as tk
 from mvc.model.Game import Game
 from mvc.model.GameState import GameState
 from mvc.model.ClassicRuleset import ClassicRuleset
+from mvc.model.Option import Option
 from mvc.view.GameView import GameView
 from mvc.view.PlaceShipView import PlaceShipView
 from mvc.view.HomeView import HomeView
@@ -16,8 +17,10 @@ class MainController:
         root.title("Battleship game")
 
         # Init state of the game
-        self.ruleset = ClassicRuleset()
-        self.game = Game(self.ruleset)
+        self.options = Option()
+        self.options.set_ruleset(ClassicRuleset())
+        self.options.set_ai(None)  # TODO
+        self.game = Game(self.options)
 
         # Init home view
         self.view_root = root

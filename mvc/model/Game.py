@@ -1,16 +1,18 @@
+from mvc.model.AIPlayer import AIPlayer
 from mvc.model.GameState import GameState
 from mvc.model.Grid import Grid
-from mvc.model.Player import Player
-from mvc.model.PlayerType import PlayerType
+from mvc.model.HumanPlayer import HumanPlayer
+from mvc.model.Option import Option
 
 
 class Game:
-    def __init__(self, ruleset):
-        self.ruleset = ruleset
+    def __init__(self, option: Option):
+        self.ruleset = option.ruleset
+        self.ai = option.ai
 
         # At initialization, State is in Menu mode.
         self.state = GameState.MENU
 
         # When we initialize a game, we init the player objects
-        self.player = Player("Player", Grid(ruleset.side_length), PlayerType.HUMAN, None, ruleset)
-        self.opponent = Player("AI opponent", Grid(ruleset.side_length), PlayerType.AI, None, ruleset)
+        self.player = HumanPlayer("Player", Grid(self.ruleset.side_length), self.ruleset)
+        self.opponent = AIPlayer("AI opponent", Grid(self.ruleset.side_length), self.ruleset, self.ai)
