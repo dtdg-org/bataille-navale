@@ -1,9 +1,10 @@
 from tkinter import Frame, Canvas
 
+from mvc.model.Observer import Observer
 from mvc.model.enum.Colors import Colors
 
 
-class GridView(Frame):
+class GridView(Frame, Observer):
     """
     Parent class for all grid views. Is in charge of displaying a grid
     of a certain amount of squares and route mouse click and hovering
@@ -86,3 +87,6 @@ class GridView(Frame):
     def update_grid_view(self):
         for position in self.battleship_grid.keys():
             self.draw_square(position[0], position[1])
+
+    def update(self):
+        self.update_grid_view()

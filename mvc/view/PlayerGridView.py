@@ -6,6 +6,7 @@ from mvc.view.GridView import GridView
 class PlayerGridView(GridView):
     def __init__(self, game, **kw):
         super().__init__(game, **kw)
+        self.observe(game.player.grid)
 
     def show(self):
         self.tkraise()
@@ -27,8 +28,8 @@ class PlayerGridView(GridView):
         color = Colors.NO_BOAT
         if square.is_miss:
             color = Colors.MISS
-        if square.is_hit:
-            color = Colors.HIT
         if square.has_boat:
             color = Colors.BOAT
+        if square.is_hit:
+            color = Colors.HIT
         self.battleship_grid[(col, row)]['background'] = color.value

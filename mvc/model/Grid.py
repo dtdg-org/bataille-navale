@@ -1,9 +1,11 @@
+from mvc.model.Observable import Observable
 from mvc.model.enum.Direction import Direction
 from mvc.model.Square import Square
 
 
-class Grid:
+class Grid(Observable):
     def __init__(self, length_side) -> None:
+        super().__init__()
         self.rows_indices = [i for i in range(1, length_side + 1)]  # 1, 2, 3, ...
         self.columns_indices = [chr(ord('A') + i) for i in range(0, length_side)]  # A, B, C ...
 
@@ -17,10 +19,12 @@ class Grid:
     def hit(self, col, row) -> bool:
         if self.squares[col][row].has_boat and not self.squares[col][row].is_hit:
             self.squares[col][row].set_hit(True)
-            return True
+            ret = True
         else:
             self.squares[col][row].set_miss(True)
-            return False
+            ret = False
+        self.update()
+        return ret
 
     def flag(self, col, row) -> bool:
         square = self.squares[col][row]

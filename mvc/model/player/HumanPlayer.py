@@ -7,3 +7,6 @@ class HumanPlayer(Player):
         super().__init__(name, grid, ruleset)
         self.player_type = PlayerType.HUMAN
         self.ai = None
+
+    def play_turn(self, grid, col, row):
+        grid.hit(col, row)

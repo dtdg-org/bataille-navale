@@ -6,12 +6,14 @@ from mvc.view.GridView import GridView
 class OpponentGridView(GridView):
     def __init__(self, game, **kw):
         super().__init__(game, **kw)
+        self.observe(game.opponent.grid)
 
     def show(self):
         self.tkraise()
 
     def click_on_square(self, event, col, row, game: Game):
-        hit = game.opponent.grid.hit(col, row)
+        game.play_turn(col, row)
+        # hit = game.opponent.grid.hit(col, row)
         super().click_on_square(event, col, row, game)
 
     def right_click(self, event, col, row, game):

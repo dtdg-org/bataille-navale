@@ -16,3 +16,17 @@ class Game:
         # When we initialize a game, we init the player objects
         self.player = HumanPlayer("Player", Grid(self.ruleset.side_length), self.ruleset)
         self.opponent = AIPlayer("AI opponent", Grid(self.ruleset.side_length), self.ruleset, self.ai)
+
+        self.player_turn = True  # Will act as a mutex
+
+    def play_turn(self, col, row):
+        if self.player_turn:
+            self.player_turn = False
+            self.player.play_turn(self.opponent.grid, col, row)
+            self.opponent.grid.hit(col, row)
+
+            # Now time for opponent to play.
+            self.opponent.play_turn(self.player.grid)
+            self.player_turn = True
+        else:
+            print("Not player's turn.")
