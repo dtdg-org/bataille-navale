@@ -17,19 +17,23 @@ class Grid(Observable):
                 self.squares[column_indice][row_indice] = Square()
 
     def hit(self, col, row) -> bool:
-        if self.squares[col][row].has_boat and not self.squares[col][row].is_hit:
-            self.squares[col][row].set_hit(True)
+        """ Returns True if the hit is valid, False else. """
+        square = self.squares[col][row]
+        if square.has_boat and not square.is_hit:
+            square.set_hit(True)
             ret = True
-        else:
-            self.squares[col][row].set_miss(True)
+        elif square.is_hit or square.is_miss:
             ret = False
+        else:
+            square.set_miss(True)
+            ret = True
         self.update()
         return ret
 
     def flag(self, col, row) -> bool:
         square = self.squares[col][row]
         if not square.is_miss and not square.is_hit:
-            self.squares[col][row].set_flag(True)
+            square.set_flag(True)
             return True
         else:
             return False

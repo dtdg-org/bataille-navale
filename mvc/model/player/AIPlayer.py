@@ -29,4 +29,4 @@ class AIPlayer(Player):
 
     def play_turn(self, grid):
         col, row = self.ai.next_move(grid)
-        grid.hit(col, row)
+        return grid.hit(col, row)

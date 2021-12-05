@@ -22,11 +22,15 @@ class Game:
     def play_turn(self, col, row):
         if self.player_turn:
             self.player_turn = False
-            self.player.play_turn(self.opponent.grid, col, row)
-            self.opponent.grid.hit(col, row)
+            is_player_move_valid = self.player.play_turn(self.opponent.grid, col, row)
+            if not is_player_move_valid:
+                self.player_turn = True
+                return
 
             # Now time for opponent to play.
-            self.opponent.play_turn(self.player.grid)
+            is_opponent_move_valid = False
+            while not is_opponent_move_valid:
+                is_opponent_move_valid = self.opponent.play_turn(self.player.grid)
             self.player_turn = True
         else:
             print("Not player's turn.")

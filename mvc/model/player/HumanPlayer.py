@@ -9,4 +9,4 @@ class HumanPlayer(Player):
         self.ai = None
 
     def play_turn(self, grid, col, row):
-        grid.hit(col, row)
+        return grid.hit(col, row)
