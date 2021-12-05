@@ -25,21 +25,23 @@ class PlaceShipGridView(GridView):
     def right_click(self, event, col, row, game):
         self.direction = Direction.SOUTH if self.direction == Direction.EAST else Direction.EAST
         super().right_click(event, col, row, game)
-        self.cursor_enter_square(event, col, row, game)
+        self.draw_boat_positions(col, row)
 
     def cursor_enter_square(self, event, col, row, game):
+        self.draw_boat_positions(col, row)
+        super().cursor_enter_square(event, col, row, game)
+
+    def draw_boat_positions(self, col, row):
         boat_size = self.game.player.get_size_of_next_boat_to_place()
         positions = []
         try:
             positions = self.game.player.grid.compute_positions(col, row, boat_size, self.direction)
         except:
             pass  # Swallow exception completely.
-
         for position in positions:
             _col = position[0]
             _row = position[1]
             self.draw_hovered_square(_col, _row)
-        super().cursor_enter_square(event, col, row, game)
 
     def cursor_leave_square(self, event, col, row, game):
         super().cursor_leave_square(event, col, row, game)

@@ -1,5 +1,9 @@
+from mvc.model.Grid import Grid
+from mvc.model.ruleset.Ruleset import Ruleset
+
+
 class Player:
-    def __init__(self, name, grid, ruleset):
+    def __init__(self, name, grid: Grid, ruleset: Ruleset):
         self.name = name
         self.grid = grid
         self.ruleset = ruleset

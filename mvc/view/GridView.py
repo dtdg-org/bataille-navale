@@ -4,7 +4,7 @@ from mvc.model.Observer import Observer
 from mvc.model.enum.Colors import Colors
 
 
-class GridView(Frame, Observer):
+class GridView(Observer, Frame):
     """
     Parent class for all grid views. Is in charge of displaying a grid
     of a certain amount of squares and route mouse click and hovering
@@ -53,22 +53,22 @@ class GridView(Frame, Observer):
                 self.battleship_grid[(column_index, row_index)] = square
                 i_column += 1
             i_row += 1
-        self.update_grid_view()
+        self.update()
 
     def show(self):
         self.tkraise()
 
     def click_on_square(self, event, col, row, game):
-        self.update_grid_view()
+        self.update()
 
     def right_click(self, event, col, row, game):
-        self.update_grid_view()
+        self.update()
 
     def cursor_enter_square(self, event, col, row, game):
         pass
 
     def cursor_leave_square(self, event, col, row, game):
-        self.update_grid_view()
+        self.update()
 
     def draw_square(self, col, row):
         square = self.game.player.grid.squares[col][row]
@@ -84,9 +84,6 @@ class GridView(Frame, Observer):
     def draw_hovered_square(self, col, row):
         self.battleship_grid[(col, row)]['background'] = Colors.SELECTED.value
 
-    def update_grid_view(self):
+    def update(self):
         for position in self.battleship_grid.keys():
             self.draw_square(position[0], position[1])
-
-    def update(self):
-        self.update_grid_view()
