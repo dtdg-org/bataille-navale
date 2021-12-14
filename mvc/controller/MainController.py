@@ -17,15 +17,20 @@ class MainController:
         root.title("Battleship game")
 
         # Init state of the game
-        self.options = Option()
-        self.options.set_ruleset(ClassicRuleset())
-        self.options.set_ai(None)  # TODO
-        self.game = Game(self.options)
+        self.game, self.options = self.init_new_game()
 
         # Init home view
         self.view_root = root
         self.view = HomeView(self, master=self.view_root)
         self.view.show()
+
+    @staticmethod
+    def init_new_game():
+        options = Option()
+        options.set_ruleset(ClassicRuleset())
+        options.set_ai(None)  # TODO
+        game = Game(options)
+        return game, options
 
     def run(self):
         self.view_root.mainloop()
@@ -45,4 +50,12 @@ class MainController:
         self.game.opponent.place_all_boats()
         self.view = GameView(self, self.game, master=self.view_root)
         self.game.state = GameState.IN_GAME
+        self.view.show()
+
+    def load_home_menu(self):
+        """
+        Load the Home Menu
+        """
+        self.game, self.options = self.init_new_game()
+        self.view = HomeView(self, master=self.view_root)
         self.view.show()

@@ -17,6 +17,9 @@ class Square:
     def set_flag(self, flag):
         self.is_flag = flag
 
+    def has_alive_boat(self):
+        return self.has_boat and not self.is_hit
+
     def __str__(self) -> str:
         return f'{{boat: {self.has_boat}, hit: {self.is_hit}}}'
 

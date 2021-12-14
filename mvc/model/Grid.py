@@ -131,6 +131,13 @@ class Grid(Observable):
         except:
             pass  # Dégagez y'a rien à voir !
 
+    def has_grid_alive_boats(self):
+        ret = False
+        for col in self.squares.values():
+            for square in col.values():
+                ret = ret or square.has_alive_boat()
+        return ret
+
 
 # TODO : Montrer à Grégoire cette manière de débug
 if __name__ == "__main__":

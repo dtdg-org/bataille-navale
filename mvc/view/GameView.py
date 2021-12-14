@@ -1,16 +1,22 @@
-from tkinter import Frame, Canvas, Label
+from tkinter import Frame, Canvas, Label, Button, DISABLED, NORMAL
 
+from mvc.model.Observer import Observer
+from mvc.model.enum.GameState import GameState
 from mvc.view.GridView import GridView
 from mvc.view.OpponentGridView import OpponentGridView
 from mvc.view.PlayerGridView import PlayerGridView
 
 
-class GameView(Frame):
+class GameView(Observer, Frame):
     TITLE_TEXT = "Fight and defeat your opponent ! Your ship on the left grid, opponent ships on the right grid."
 
     def __init__(self, controller, game, **kw):
         super().__init__(**kw)
         self.grid(column=0, row=0, padx=5, pady=5, sticky="nsew")
+
+        self.controller = controller
+        self.game = game
+        self.observe(game)
 
         # Title definition
         title = Label(self, text=self.TITLE_TEXT, relief='groove', height=2)
@@ -43,6 +49,21 @@ class GameView(Frame):
         opponent_battleship_grid = OpponentGridView(game, master=self)
         opponent_battleship_grid.grid(column=2, row=1, padx=20, pady=5)
         self.opponent_battleship_grid = opponent_battleship_grid
+
+        # Fight against AI Opponent button
+        game_over_button = Button(master=self,
+                                  text='GAME OVER !\nReturn to main menu.',
+                                  state=DISABLED,
+                                  command=controller.load_home_menu)
+        game_over_button.grid(column=0, row=2, padx=5, pady=5, columnspan=3)
+        self.game_over_button = game_over_button
+
+    def update(self):
+        """
+        This method is in charge of updating the state of the game over button.
+        """
+        if self.game.state == GameState.GAME_OVER:
+            self.game_over_button['state'] = NORMAL
 
     def show(self):
         self.tkraise()

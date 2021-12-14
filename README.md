@@ -9,6 +9,4 @@ Jeu de la bataille navale en Python avec interface graphique !
 
 Game screen:
 
-Create different AI strategy
-Add Miss state and flag state to the Square.
-Make the players run turn by turn.
+Transformer le projet en "atelier".
