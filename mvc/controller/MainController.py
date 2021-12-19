@@ -47,9 +47,7 @@ class MainController:
         """
         Make the Opponent choose his boat placements and then load the game view
         """
-        self.game.opponent.place_all_boats()
-        self.view = GameView(self, self.game, master=self.view_root)
-        self.game.state = GameState.IN_GAME
+        # TODO
         self.view.show()
 
     def load_home_menu(self):

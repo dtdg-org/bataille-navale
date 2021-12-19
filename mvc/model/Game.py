@@ -43,10 +43,22 @@ class Game(Observable):
             self.update()
 
     def is_game_over(self):
-        return self.is_player_winner() or self.is_opponent_winner()
+        """
+        :return: A boolean, True if the game is over, False else.
+        """
+        # TODO
+        pass
 
     def is_player_winner(self):
-        return not self.opponent.grid.has_grid_alive_boats()
+        """
+        :return: A boolean, True if the player is winner, False else.
+        """
+        # TODO
+        pass
 
     def is_opponent_winner(self):
-        return not self.player.grid.has_grid_alive_boats()
+        """
+        :return: A boolean, True if the opponent is winner, False else.
+        """
+        # TODO
+        pass

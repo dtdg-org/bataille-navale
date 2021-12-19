@@ -132,10 +132,11 @@ class Grid(Observable):
             pass  # Dégagez y'a rien à voir !
 
     def has_grid_alive_boats(self):
+        """
+        :return: a boolean, True if the grid still has any square where a boat is alive. False else.
+        """
         ret = False
-        for col in self.squares.values():
-            for square in col.values():
-                ret = ret or square.has_alive_boat()
+        # TODO
         return ret
 
 
